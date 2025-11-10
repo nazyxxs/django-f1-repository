@@ -47,15 +47,9 @@
 ---
 
 ## 🛠️ Технології
-- Python 3.12  
-- Django 5.2  
+- Python 
+- Django
 - Django REST Framework  
 - MySQL  
 - Postman  
 - Repository Pattern  
-
----
-
-## 👨‍💻 Автор
-**Nazarii Styk** — студент групи **ШІ-22**,  
-Національний університет «Львівська політехніка»  
