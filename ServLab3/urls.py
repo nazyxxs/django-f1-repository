@@ -1,3 +1,4 @@
+# Підключає маршрути додатку f1
 from django.contrib import admin
 from django.urls import path, include
 

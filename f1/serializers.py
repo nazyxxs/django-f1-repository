@@ -1,3 +1,4 @@
+# Перетворює моделі в JSON
 from rest_framework import serializers
 from .models import Teams, Drivers, Circuits
 

@@ -1,3 +1,4 @@
+# Локальні маршрути API
 from django.urls import path, include
 from rest_framework import routers
 from .views import TeamViewSet, DriverViewSet, CircuitViewSet, team_driver_report
