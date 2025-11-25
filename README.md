@@ -1,55 +1,90 @@
-# 🏎️ Formula 1 Repository & REST API Project
-
-## 📘 Опис
-Навчальний проєкт із дисципліни **«Програмування на стороні сервера»**  
-Проєкт побудовано на **Django** та **Django REST Framework**.  
-Реалізовано патерн **Repository** для роботи з базою даних Formula 1 і створено REST API для взаємодії з даними через HTTP-запити.
+# 🏎️ Formula 1 — Server-Side Programming Project  
+### ✔ Django + DRF + Repository Pattern + Templates + External API Integration
 
 ---
 
-## ⚙️ Основні можливості
+## 📘 Опис проєкту
+Цей навчальний проєкт виконано в межах дисципліни **«Програмування на стороні сервера»**.  
+Проєкт реалізує:
 
-### 🔹 Частина 1 — Репозиторій
-- Реалізація патерну **Repository** для інкапсуляції доступу до бази даних  
-- Методи:  
-  - `list_all()` — перегляд усіх записів  
-  - `get_by_id()` — отримання запису за ID  
-  - `add()` — додавання нового запису  
-  - `delete_by_id()` — видалення запису  
-- Робота з таблицями: Teams, Drivers, Circuits, Cars, Races, Results тощо
-
----
-
-### 🔹 Частина 2 — REST API
-- Створено REST API з допомогою **Django REST Framework**
-- Реалізовано CRUD-операції для сутностей:
-  - `/api/teams/`
-  - `/api/drivers/`
-  - `/api/circuits/`
-- Реалізовано звіт (агрегований результат) `/api/report/`, який показує кількість пілотів у кожній команді
-- Тестування API виконано через **Postman**
-- Формат відповідей — **JSON**
-- Доступ до даних відбувається **через клас-репозиторій** (`F1Repository`)
-- Базова аутентифікація налаштована, але тимчасово вимкнена для тестування
+- роботу з базою даних Formula 1 (Teams, Drivers, Circuits, Cars тощо)
+- патерн **Repository**
+- повноцінний **REST API** через Django REST Framework
+- **HTML-шаблони Django** (list/detail/form/delete)
+- інтеграцію зі **стороннім REST API колеги** через бібліотеку `requests` та BasicAuth
+- фронтенд-сторінки для роботи з даними (власними та чужими)
 
 ---
 
-## 🔗 Приклади ендпоїнтів
+# 🧩 Частина 1 — Repository Pattern
 
-| Метод | URL | Опис |
-|--------|-----|------|
-| `GET` | `/api/teams/` | Отримати список команд |
-| `POST` | `/api/teams/` | Додати нову команду |
-| `PUT` | `/api/teams/{id}/` | Оновити дані команди |
-| `DELETE` | `/api/teams/{id}/` | Видалити команду |
-| `GET` | `/api/report/` | Отримати звіт по кількості пілотів |
+Проєкт використовує власні репозиторії (`F1Repository` + вкладені класи), які інкапсулюють логіку доступу до бази даних.
+
+### Реалізовано методи:
+- `list_all()` — отримання всіх записів  
+- `get_by_id()` — отримання одного об’єкта  
+- `add()` — створення нового запису  
+- `update()` — редагування  
+- `delete_by_id()` — видалення  
+
+Repository використовується у всіх **ViewSet-ах DRF**.
 
 ---
 
-## 🛠️ Технології
-- Python 
-- Django
-- Django REST Framework  
-- MySQL  
-- Postman  
-- Repository Pattern  
+# 🌐 Частина 2 — REST API (Django REST Framework)
+
+Для кожної сутності бази даних реалізовано CRUD через DRF:
+
+| Endpoint | Опис |
+|---------|------|
+| `/api/teams/` | CRUD команд |
+| `/api/drivers/` | CRUD гонщиків |
+| `/api/circuits/` | CRUD трас |
+| `/api/principals/` | CRUD керівників |
+| `/api/cars/` | CRUD машин |
+| `/api/results/` | CRUD результатів |
+| `/api/report/` | агрегований звіт |
+
+### Звіт:
+`GET /api/report/`  
+Повертає кількість пілотів у кожній команді (GROUP BY + COUNT).
+
+### API використовує:
+- ViewSet-и  
+- Routers  
+- Serializers  
+- DjangoFilterBackend  
+
+---
+
+# 🎨 Частина 3 — Робота з шаблонами (Frontend)
+
+За вимогою лабораторної створено повний CRUD у шаблонах для сутності **Principals**.
+
+### ✔ Реалізовані сторінки:
+- `/frontend/principals/` — список керівників  
+- `/frontend/principals/<id>/` — детальна сторінка  
+- `/frontend/principals/add/` — створення  
+- `/frontend/principals/<id>/edit/` — редагування  
+- `/frontend/principals/<id>/delete/` — підтвердження видалення  
+
+### ✔ Використано:
+- Django ModelForm (`PrincipalForm`)
+- HTML forms + CSRF захист
+- Template loops
+- Передача ForeignKey (principal → team)
+- Окрема сторінка підтвердження видалення
+
+---
+
+# 🔗 Частина 4 — Інтеграція зі стороннім REST API
+
+Було розгорнуто проєкт колеги (на порту **8001**), створено користувача, додано дані через Django Admin.
+
+### 📌 Розроблено `NetworkHelper.py`
+```python
+get_list()
+get_item()
+create_item()
+update_item()
+delete_item()

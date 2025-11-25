@@ -1,0 +1,14 @@
+<h1>Principals</h1>
+
+<a href="{% url 'principal_add' %}">Add new principal</a>
+
+<ul>
+    {% for p in principals %}
+        <li>
+            <a href="{% url 'principal_detail' p.principal_id %}">
+                {{ p.first_name }} {{ p.last_name }}
+                {% if p.team %} ({{ p.team.team_name }}) {% endif %}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

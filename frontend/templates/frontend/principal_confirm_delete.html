@@ -1,0 +1,12 @@
+<h1>Confirm Delete</h1>
+
+<p>Are you sure you want to delete:</p>
+
+<h2>{{ principal.first_name }} {{ principal.last_name }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
+<a href="{% url 'principal_detail' principal.principal_id %}">Cancel</a>

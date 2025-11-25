@@ -1,0 +1,15 @@
+<h1>Remote Clients (from API of teammate)</h1>
+
+<ul>
+    {% for c in clients %}
+        <li>
+            {{ c.firstName }} {{ c.lastName }} — {{ c.phoneNumber }}
+
+            <form action="{% url 'remote_clients_delete' c.idClient %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+
+        </li>
+    {% endfor %}
+</ul>

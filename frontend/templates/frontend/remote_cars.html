@@ -1,0 +1,15 @@
+<h1>Remote Cars (from API of teammate)</h1>
+
+<ul>
+    {% for car in cars %}
+        <li>
+            {{ car.brand }} {{ car.model }} ({{ car.licensePlate }})
+
+            <form action="{% url 'remote_cars_delete' car.idCar %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+
+        </li>
+    {% endfor %}
+</ul>

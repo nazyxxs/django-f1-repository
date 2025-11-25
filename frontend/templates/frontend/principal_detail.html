@@ -1,0 +1,21 @@
+<h1>{{ principal.first_name }} {{ principal.last_name }}</h1>
+
+<p>Nationality: {{ principal.nationality }}</p>
+<p>Birth date: {{ principal.birth_date }}</p>
+
+{% if principal.team %}
+    <p>Team: {{ principal.team.team_name }}</p>
+{% else %}
+    <p>Team: No team</p>
+{% endif %}
+
+<p>Period: {{ principal.start_year }} - {{ principal.end_year }}</p>
+
+<a href="{% url 'principal_edit' principal.principal_id %}">Edit</a>
+
+<a href="{% url 'principal_delete' principal.principal_id %}">
+    Delete
+</a>
+
+
+<a href="{% url 'principal_list' %}">Back</a>
