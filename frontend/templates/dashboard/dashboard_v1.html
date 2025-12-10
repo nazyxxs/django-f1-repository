@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .chart-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="padding-top: 20px; padding-bottom: 50px;">
+    <h1 class="text-center mb-5">Статистика Формули-1 (6 графіків)</h1>
+
+    <!-- JS для синхронізації обох фільтрів -->
+    <script>
+    function syncFilters() {
+        let count = document.getElementById("count").value;
+        let minWins = document.getElementById("min_wins").value;
+
+        let url = `?count=${count}&min_wins=${minWins}`;
+        window.location.href = url;
+    }
+    </script>
+
+    <div class="chart-section">
+        <h3>1. Середня кількість очок пілотів</h3>
+
+        <form method="get" class="mb-3" id="pilotCountForm" onsubmit="syncFilters(); return false;">
+            <label for="count" class="form-label">Виберіть кількість пілотів:</label>
+
+            <select id="count" name="count" class="form-select" style="max-width: 200px;"
+                    onchange="syncFilters();">
+                <option value="5"  {% if selected_count == '5' %}selected{% endif %}>5</option>
+                <option value="10" {% if selected_count == '10' %}selected{% endif %}>10</option>
+                <option value="15" {% if selected_count == '15' %}selected{% endif %}>15</option>
+                <option value="20" {% if selected_count == '20' %}selected{% endif %}>20</option>
+                <option value="30" {% if selected_count == '30' %}selected{% endif %}>30</option>
+            </select>
+        </form>
+
+        <div class="chart-container">
+            {{ chart1|safe }}
+        </div>
+    </div>
+
+
+    <div class="chart-section">
+        <h3>2. Кількість перемог пілотів</h3>
+
+        <form method="get" id="winsFilterForm" class="mb-3" onsubmit="syncFilters(); return false;">
+            <label for="min_wins" class="form-label">
+                Мінімальна кількість перемог: <b>{{ selected_min_wins }}</b>
+            </label>
+
+            <input type="range"
+                   class="form-range"
+                   id="min_wins"
+                   name="min_wins"
+                   min="0"
+                   max="15"
+                   value="{{ selected_min_wins }}"
+                   oninput="this.nextElementSibling.innerText = this.value"
+                   onchange="syncFilters();">
+
+            <span>{{ selected_min_wins }}</span>
+        </form>
+
+        <div class="chart-container">
+            {{ chart2|safe }}
+        </div>
+    </div>
+
+
+    <div class="chart-section">
+        <h3>3. Кількість гонок на трасах</h3>
+        <div class="chart-container">
+            {{ chart3|safe }}
+        </div>
+    </div>
+
+
+    <div class="chart-section">
+        <h3>4. Загальні очки команд</h3>
+        <div class="chart-container">
+            {{ chart4|safe }}
+        </div>
+    </div>
+
+
+    <div class="chart-section">
+        <h3>5. Пілоти, які виступали у більше ніж 1 команді</h3>
+        <div class="chart-container">
+            {{ chart5|safe }}
+        </div>
+    </div>
+
+
+    <div class="chart-section">
+        <h3>6. Топ-3 команди за сумою очок</h3>
+        <div class="chart-container">
+            {{ chart6|safe }}
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

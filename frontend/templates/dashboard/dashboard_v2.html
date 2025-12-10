@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard v2 — Bokeh</title>
+
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.8.1.min.js"></script>
+
+
+    <!-- СТИЛІ -->
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .chart-section {
+            background: #fff;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+    </style>
+
+    {{ bokeh_script|safe }}
+
+</head>
+
+<body>
+
+<h1>Статистика Формули-1 — Dashboard v2 (Bokeh)</h1>
+
+<div class="chart-section">
+    <h3>1. Середня кількість очок пілотів</h3>
+    {{ chart1|safe }}
+</div>
+
+<div class="chart-section">
+    <h3>2. Кількість перемог пілотів</h3>
+    {{ chart2|safe }}
+</div>
+
+<div class="chart-section">
+    <h3>3. Кількість гонок на трасах</h3>
+    {{ chart3|safe }}
+</div>
+
+<div class="chart-section">
+    <h3>4. Загальні очки команд</h3>
+    {{ chart4|safe }}
+</div>
+
+<div class="chart-section">
+    <h3>5. Пілоти, які виступали у більше ніж 1 команді</h3>
+    {{ chart5|safe }}
+</div>
+
+<div class="chart-section">
+    <h3>6. Топ-3 команди за сумою очок</h3>
+    {{ chart6|safe }}
+</div>
+
+<div class="text-center mb-4">
+    <a href="/api/dashboard/parallel/" class="btn btn-primary">
+        Запустити тест паралельних обчислень
+    </a>
+</div>
+
+
+</body>
+</html>

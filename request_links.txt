@@ -1,0 +1,22 @@
+=== 1 TASK ===
+
+1) http://127.0.0.1:8000/api/stats/drivers/avg-points/
+2) http://127.0.0.1:8000/api/stats/drivers/wins/
+3) http://127.0.0.1:8000/api/stats/circuits/races/
+4) http://127.0.0.1:8000/api/stats/teams/total-points/
+5) http://127.0.0.1:8000/api/stats/drivers/multi-team/
+6) http://127.0.0.1:8000/api/stats/teams/top3/
+
+
+=== 2 TASK ===
+1) http://127.0.0.1:8000/api/stats/basic/positions/
+2) http://127.0.0.1:8000/api/stats/basic/track-length/
+-------------------------------------------------------
+1) http://127.0.0.1:8000/api/stats/group/driver-position/
+2) http://127.0.0.1:8000/api/stats/group/track-length-country/
+3) http://127.0.0.1:8000/api/stats/group/points-season/
+
+
+=== 3 TASK ===
+1) http://127.0.0.1:8000/api/dashboard/v1/
+2) http://127.0.0.1:8000/api/dashboard/v2/
